@@ -3,10 +3,12 @@
 #include <cstdlib>
 #include <vector>
 #include <chrono> 
+#include <ctime>
 using namespace std;
 void SelectionSort(vector<int>& v);
 void InsertionSort(vector<int>& v);
 void PrintVector(vector<int> v);
+void PrintTime(chrono::high_resolution_clock::time_point start, chrono::high_resolution_clock::time_point end);
 
 int main()
 {
@@ -15,13 +17,23 @@ int main()
 
 	PrintVector(selection);
 
+	auto startSelection = chrono::high_resolution_clock::now();
+
 	SelectionSort(selection);
+
+	auto endSelection = chrono::high_resolution_clock::now();
+
+	auto startInsertion = chrono::high_resolution_clock::now();
 
 	InsertionSort(insertion);
 
+	auto endInsertion = chrono::high_resolution_clock::now();
+
 	PrintVector(insertion);
+	PrintTime(startSelection, endSelection);
 
 	PrintVector(selection);
+	PrintTime(startInsertion, endInsertion);
 
 	return 0;
 }
@@ -75,8 +87,6 @@ void InsertionSort(vector<int>& v)
 
 }
 
-
-
 void PrintVector(vector<int> v)
 {
 	cout << v.at(0);
@@ -85,4 +95,11 @@ void PrintVector(vector<int> v)
 		cout << ", " << v.at(i);
 	}
 	cout << endl;
+}
+
+void PrintTime(chrono::high_resolution_clock::time_point start, chrono::high_resolution_clock::time_point end)
+{
+	auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start);
+
+	cout << "Runtime: " << duration.count() << " nanoseconds" << endl;
 }
