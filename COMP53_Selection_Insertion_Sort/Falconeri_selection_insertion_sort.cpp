@@ -15,7 +15,7 @@ int main()
 {
 	srand(time(0));
 
-	int size = 1500;
+	int size = 15;
 
 	cout << "Enter a number for the size of the array: ";
 	cin >> size;
@@ -23,6 +23,10 @@ int main()
 	vector<int> v;
 	randomizer(v, size);
 	
+	PrintVector(v, 0, size);
+	PrintVector(v, size, size * 2);
+	PrintVector(v, 0, size * 2);
+
 	auto startSelection = chrono::high_resolution_clock::now();
 
 	//Selection Sort
@@ -36,6 +40,10 @@ int main()
 	InsertionSort(v, size, size*2);
 
 	auto endInsertion = chrono::high_resolution_clock::now();
+
+	PrintVector(v, 0, size);
+	PrintVector(v, size, size * 2);
+	PrintVector(v, 0, size * 2);
 
 	cout << "Selection Sort Runtime: " << chrono::duration_cast<chrono::nanoseconds>(endSelection - startSelection).count() << " nanoseconds" << endl;
 
@@ -71,7 +79,7 @@ void InsertionSort(vector<int>& v, int const start, int const end)
 		int key = v.at(i);
 		int j = i - 1;
 
-		while (j >= 0 && v.at(j) > key)
+		while (j >= start && v.at(j) > key)
 		{
 			v.at(j + 1) = v.at(j);
 			j--;
