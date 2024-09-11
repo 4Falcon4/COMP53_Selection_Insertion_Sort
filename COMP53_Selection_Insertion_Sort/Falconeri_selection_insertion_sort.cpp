@@ -20,23 +20,20 @@ int main()
 	cout << "Enter a number for the size of the array: ";
 	cin >> size;
 
-	vector<int> base;
-	randomizer(base, size);
-
-	vector<int> selection = base;
-	vector<int> insertion = base;
+	vector<int> v;
+	randomizer(v, size);
 	
 	auto startSelection = chrono::high_resolution_clock::now();
 
 	//Selection Sort
-	SelectionSort(selection, size);
+	SelectionSort(v, size);
 
 	auto endSelection = chrono::high_resolution_clock::now();
 	
 	auto startInsertion = chrono::high_resolution_clock::now();
 
 	//Insertion Sort
-	InsertionSort(insertion, size);
+	InsertionSort(v, size);
 
 	auto endInsertion = chrono::high_resolution_clock::now();
 
