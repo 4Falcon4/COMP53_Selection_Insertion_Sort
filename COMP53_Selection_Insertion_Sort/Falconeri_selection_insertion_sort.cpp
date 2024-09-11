@@ -14,7 +14,12 @@ void PrintVector(vector<int> v);
 int main()
 {
 	srand(time(0));
-	int size = 15;
+
+	int size = 1500;
+
+	cout << "Enter a number for the size of the array: ";
+	cin >> size;
+
 	vector<int> base;
 	randomizer(base, size);
 
