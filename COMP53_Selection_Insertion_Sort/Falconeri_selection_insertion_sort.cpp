@@ -26,14 +26,14 @@ int main()
 	auto startSelection = chrono::high_resolution_clock::now();
 
 	//Selection Sort
-	SelectionSort(v, size);
+	SelectionSort(v, 0, size);
 
 	auto endSelection = chrono::high_resolution_clock::now();
 	
 	auto startInsertion = chrono::high_resolution_clock::now();
 
 	//Insertion Sort
-	InsertionSort(v, size*2);
+	InsertionSort(v, size, size*2);
 
 	auto endInsertion = chrono::high_resolution_clock::now();
 
