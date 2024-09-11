@@ -9,12 +9,12 @@ void SelectionSort(vector<int>& v, int const size);
 void InsertionSort(vector<int>& v, int const size);
 void randomizer(vector<int>& v, int count);
 void PrintVector(vector<int> v);
-void PrintTime(chrono::high_resolution_clock::time_point start, chrono::high_resolution_clock::time_point end);
+
 
 int main()
 {
 	srand(time(0));
-	int size = 1500;
+	int size = 15;
 	vector<int> base;
 	randomizer(base, size);
 
@@ -23,18 +23,21 @@ int main()
 	
 	auto startSelection = chrono::high_resolution_clock::now();
 
+	//Selection Sort
 	SelectionSort(selection, size);
 
 	auto endSelection = chrono::high_resolution_clock::now();
 	
 	auto startInsertion = chrono::high_resolution_clock::now();
 
+	//Insertion Sort
 	InsertionSort(insertion, size);
 
 	auto endInsertion = chrono::high_resolution_clock::now();
 
-	PrintTime(startSelection, endSelection);
-	PrintTime(startInsertion, endInsertion);
+	cout << "Selection Sort Runtime: " << chrono::duration_cast<chrono::nanoseconds>(endSelection - startSelection).count() << " nanoseconds" << endl;
+
+	cout << "Insertion Sort Runtime: " << chrono::duration_cast<chrono::nanoseconds>(endInsertion - startInsertion).count() << " nanoseconds" << endl;
 
 	return 0;
 }
@@ -81,7 +84,7 @@ void randomizer(vector<int>& v, int count)
 	v.clear();
 	for (int i = 0; i < count; i++)
 	{
-		v.push_back(rand() % 50);
+		v.push_back(rand() % 99);
 	}
 }
 
@@ -93,11 +96,4 @@ void PrintVector(vector<int> v)
 		cout << ", " << v.at(i);
 	}
 	cout << endl;
-}
-
-void PrintTime(chrono::high_resolution_clock::time_point start, chrono::high_resolution_clock::time_point end)
-{
-	auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start);
-
-	cout << "Runtime: " << duration.count() << " nanoseconds" << endl;
 }
