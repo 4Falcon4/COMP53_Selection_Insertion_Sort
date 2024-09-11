@@ -23,9 +23,14 @@ int main()
 	vector<int> v;
 	randomizer(v, size);
 	
-	PrintVector(v, 0, size);
-	PrintVector(v, size, size * 2);
-	PrintVector(v, 0, size * 2);
+	//Print Selection Section before Sorted
+	//PrintVector(v, 0, size);
+	// 
+	//Print Insertion Section before Sorted
+	//PrintVector(v, size, size * 2);
+	// 
+	//Print Entire Vector before Sorted
+	//PrintVector(v, 0, size * 2);
 
 	auto startSelection = chrono::high_resolution_clock::now();
 
@@ -37,13 +42,18 @@ int main()
 	auto startInsertion = chrono::high_resolution_clock::now();
 
 	//Insertion Sort
-	InsertionSort(v, size, size*2);
+	InsertionSort(v, size, size * 2);
 
 	auto endInsertion = chrono::high_resolution_clock::now();
 
-	PrintVector(v, 0, size);
-	PrintVector(v, size, size * 2);
-	PrintVector(v, 0, size * 2);
+	//Print Selection Section after Sorted
+	//PrintVector(v, 0, size);
+	// 
+	//Print Insertion Section after Sorted
+	//PrintVector(v, size, size * 2);
+	// 
+	//Print Entire Vector after Sorted
+	//PrintVector(v, 0, size * 2);
 
 	cout << "Selection Sort Runtime: " << chrono::duration_cast<chrono::nanoseconds>(endSelection - startSelection).count() << " nanoseconds" << endl;
 
@@ -93,7 +103,7 @@ void InsertionSort(vector<int>& v, int const start, int const end)
 void randomizer(vector<int>& v, int count)
 {
 	v.clear();
-	v.resize(count*2);
+	v.resize(count * 2);
 	for (int i = 0; i < count; i++)
 	{
 		v.at(i) = rand() % 99;
