@@ -5,10 +5,10 @@
 #include <chrono> 
 #include <ctime>
 using namespace std;
-void SelectionSort(vector<int>& v, int const size);
-void InsertionSort(vector<int>& v, int const size);
+void SelectionSort(vector<int>& v, int const start, int const end);
+void InsertionSort(vector<int>& v, int const start, int const end);
 void randomizer(vector<int>& v, int count);
-void PrintVector(vector<int> v);
+void PrintVector(vector<int> v, int start, int end);
 
 
 int main()
@@ -33,7 +33,7 @@ int main()
 	auto startInsertion = chrono::high_resolution_clock::now();
 
 	//Insertion Sort
-	InsertionSort(v, size);
+	InsertionSort(v, size*2);
 
 	auto endInsertion = chrono::high_resolution_clock::now();
 
@@ -44,13 +44,13 @@ int main()
 	return 0;
 }
 
-void SelectionSort(vector<int>& v, int const size)
+void SelectionSort(vector<int>& v, int const start, int const end)
 {
-	for (int i = 0; i < size; ++i)
+	for (int i = start; i < end; ++i)
 	{
 		int minIndex = i;
 
-		for (int j = i + 1; j < size; ++j)
+		for (int j = i + 1; j < end; ++j)
 		{
 			if (v.at(j) < v.at(minIndex))
 			{
@@ -63,9 +63,10 @@ void SelectionSort(vector<int>& v, int const size)
 
 }
 
-void InsertionSort(vector<int>& v, int const size)
+void InsertionSort(vector<int>& v, int const start, int const end)
 {
-	for (int i = 1; i < size; ++i)
+
+	for (int i = start + 1; i < end; ++i)
 	{
 		int key = v.at(i);
 		int j = i - 1;
@@ -84,16 +85,18 @@ void InsertionSort(vector<int>& v, int const size)
 void randomizer(vector<int>& v, int count)
 {
 	v.clear();
+	v.resize(count*2);
 	for (int i = 0; i < count; i++)
 	{
-		v.push_back(rand() % 99);
+		v.at(i) = rand() % 99;
+		v.at(i + count) = v.at(i);
 	}
 }
 
-void PrintVector(vector<int> v)
+void PrintVector(vector<int> v, int start, int end)
 {
-	cout << v.at(0);
-	for (int i = 1; i < v.size(); ++i)
+	cout << v.at(start);
+	for (int i = start + 1; i < end; ++i)
 	{
 		cout << ", " << v.at(i);
 	}
